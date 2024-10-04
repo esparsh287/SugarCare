@@ -7,7 +7,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LogisticRegression
+from sklearn.svm import SVC
 from sklearn.metrics import accuracy_score
 
 #def home(request):
@@ -39,27 +39,61 @@ def contact(request):
 def test(request):
     return render(request, 'blogs/test.html', {'title': "Testing Page"})
 
+#def result(request):
+    #data= pd.read_csv(r"C:\Users\espar\Downloads\diabetes.csv")
+    #X = data.drop("Outcome", axis=1) 
+    #Y = data["Outcome"]
+    #X_train, X_test, Y_train, Y_test= train_test_split(X,Y, test_size=0.2)
+    #model= LogisticRegression(max_iter=500)
+    #model.fit(X_train, Y_train)
+    #val1= float(request.GET['n1'])
+    #val2= float(request.GET['n2'])
+    #val3= float(request.GET['n3'])
+    #val4= float(request.GET['n4'])
+    #val5= float(request.GET['n5'])
+    #val6= float(request.GET['n6'])
+    #val7= float(request.GET['n7'])
+    #val8= float(request.GET['n8'])
+    #pred= model.predict([[val1, val2,val3,val4,val5,val6,val7,val8]])
+    #result2=""
+    #if pred==[1]:
+     #   result2="Positive"
+    #else:
+    #    result2="Negative"
+    #return render(request, "blogs/test.html", {"result2": result2})
+
 def result(request):
-    data= pd.read_csv(r"C:\Users\espar\Downloads\diabetes.csv")
+    # Load the dataset
+    data = pd.read_csv(r"C:\Users\espar\Downloads\diabetes.csv")
+    
+    # Split the dataset into features and target variable
     X = data.drop("Outcome", axis=1) 
     Y = data["Outcome"]
-    X_train, X_test, Y_train, Y_test= train_test_split(X,Y, test_size=0.2)
-    model= LogisticRegression(max_iter=500)
-    model.fit(X_train, Y_train)
-    val1= float(request.GET['n1'])
-    val2= float(request.GET['n2'])
-    val3= float(request.GET['n3'])
-    val4= float(request.GET['n4'])
-    val5= float(request.GET['n5'])
-    val6= float(request.GET['n6'])
-    val7= float(request.GET['n7'])
-    val8= float(request.GET['n8'])
-    pred= model.predict([[val1, val2,val3,val4,val5,val6,val7,val8]])
-    result2=""
-    if pred==[1]:
-        result2="Positive"
-    else:
-        result2="Negative"
+    
+    # Split the data into training and testing sets
+    X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_state=42)
+    
+    # Initialize the SVM model
+    model = SVC(kernel='linear')  # You can change the kernel as needed
+    model.fit(X_train, Y_train)  # Train the model
+    
+    # Get user input values
+    val1 = float(request.GET['n1'])
+    val2 = float(request.GET['n2'])
+    val3 = float(request.GET['n3'])
+    val4 = float(request.GET['n4'])
+    val5 = float(request.GET['n5'])
+    val6 = float(request.GET['n6'])
+    val7 = float(request.GET['n7'])
+    val8 = float(request.GET['n8'])
+    
+    # Make prediction using the trained model
+    pred = model.predict([[val1, val2, val3, val4, val5, val6, val7, val8]])
+    
+    # Interpret the result
+    result2 = "Positive" if pred[0] == 1 else "Negative"
+    
+    # Render the result on the webpage
     return render(request, "blogs/test.html", {"result2": result2})
 
 class PostListView(LoginRequiredMixin, ListView):
