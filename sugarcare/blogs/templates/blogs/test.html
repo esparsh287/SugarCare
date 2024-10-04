@@ -1,0 +1,57 @@
+{% extends 'blogs/base_contact.html' %}
+
+{% block content %}
+
+
+<div class="main my-3">
+  <h1>Enter the Following Informations:</h1>
+  <form action="result">
+    <div class="form-group my-3">
+      <label for="name">Pregnancies</label>
+      <input type="text" class="form-control" name="n1" id="n1" aria-describedby="name">
+    </div>
+
+    <div class="form-group my-3"></div>
+      <label for="name">Glucose</label>
+      <input type="text" class="form-control" name="n2" id="n2" aria-describedby="name">
+    </div>
+
+    <div class="form-group my-3">
+      <div class="form-group my-3">
+        <label for="name">Blood Pressure</label>
+        <input type="text" class="form-control" name="n3" id="n3" aria-describedby="name">
+      </div>
+
+    <div class="form-group my-3">
+        <label for="name">Skin Thickness</label>
+        <input type="text" class="form-control" name="n4" id="n4" aria-describedby="name">
+      </div>
+
+    <div class="form-group my-3">
+        <label for="name">Insulin</label>
+        <input type="text" class="form-control" name="n5" id="n5" aria-describedby="name">
+      </div>
+
+    <div class="form-group my-3">
+        <label for="name">BMI</label>
+        <input type="text" class="form-control" name="n6" id="n6" aria-describedby="name">
+      </div>
+
+    <div class="form-group my-3">
+        <label for="name">Diabetes Pedigree Function</label>
+        <input type="text" class="form-control" name="n7" id="n7" aria-describedby="name">
+      </div>
+
+    <div class="form-group my-3">
+      <label for="name">Age</label>
+      <input type="text" class="form-control" name="n8" id="n8" aria-describedby="name">
+    </div>
+    
+  
+    
+    <button type="submit" class="btn btn-primary my-3">Submit</button>
+  </form>
+  result:{{result2}}
+</div>
+
+{% endblock %}
