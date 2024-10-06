@@ -39,6 +39,9 @@ def contact(request):
 def test(request):
     return render(request, 'blogs/test.html', {'title': "Testing Page"})
 
+def explore(request):
+    return render(request,'blogs/explore.html', {'title':"Explore More"} )
+
 #def result(request):
     #data= pd.read_csv(r"C:\Users\espar\Downloads\diabetes.csv")
     #X = data.drop("Outcome", axis=1) 
