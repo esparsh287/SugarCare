@@ -10,7 +10,7 @@
                 <small class="text-muted">{{ posts.date_created }}</small>
               </div>
               <h2><a class="article-title" href="{% url 'blog-detail' posts.id %}">{{ posts.title }}</a></h2>
-              <p class="article-content">{{ posts.content }}</p>
+              <p class="article-content">{{ posts.content | slice:":700" }}....</p>
             </div>
             <br>
         </article>
