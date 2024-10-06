@@ -42,6 +42,9 @@ def test(request):
 def explore(request):
     return render(request,'blogs/explore.html', {'title':"Explore More"} )
 
+def meds(request):
+    return render(request, 'blogs/meds.html', {'title':"Medications"})
+
 #def result(request):
     #data= pd.read_csv(r"C:\Users\espar\Downloads\diabetes.csv")
     #X = data.drop("Outcome", axis=1) 

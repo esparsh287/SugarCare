@@ -13,5 +13,7 @@ urlpatterns=[
     path('contact/', views.contact, name="contact"),
     path('test/', views.test, name="test"),
     path('test/result', views.result),
-    path('explore/', views.explore,name="explore")
+    path('explore/', views.explore,name="explore"),
+    path('meds/', views.meds,name="meds"),
+
 ]
