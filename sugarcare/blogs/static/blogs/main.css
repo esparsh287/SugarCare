@@ -261,3 +261,30 @@ body {
    box-shadow: 0 14px 18px 0 rgba(0, 0, 0, 0.486);
    border-radius: 50px;
  }
+
+ .medication-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.medication-card .card-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.medication-card img {
+  height: 200px;
+  object-fit: cover;
+}
+
+.card-text {
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.primary-btn {
+  color: white;
+  background-color: #007bff;
+  border-radius: 5px;
+}
