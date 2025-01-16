@@ -2,60 +2,125 @@
 {% block content %}
 <div class="main my-3">
   <h1>Enter the Following Information:</h1>
-  <form action="result">
-    <div class="form-group my-3">
-      <label for="name">Pregnancies</label>
-      <input type="text" class="form-control" name="n1" id="n1" aria-describedby="name">
-    </div>
-
-    <div class="form-group my-3"></div>
-      <label for="name">Glucose</label>
-      <input type="text" class="form-control" name="n2" id="n2" aria-describedby="name">
-    </div>
-
-    <div class="form-group my-3">
-      <div class="form-group my-3">
-        <label for="name">Blood Pressure</label>
-        <input type="text" class="form-control" name="n3" id="n3" aria-describedby="name">
-      </div>
-
-    <div class="form-group my-3">
-        <label for="name">Skin Thickness</label>
-        <input type="text" class="form-control" name="n4" id="n4" aria-describedby="name">
-      </div>
-
-    <div class="form-group my-3">
-        <label for="name">Insulin</label>
-        <input type="text" class="form-control" name="n5" id="n5" aria-describedby="name">
-      </div>
-
-    <div class="form-group my-3">
-        <label for="name">BMI</label>
-        <input type="text" class="form-control" name="n6" id="n6" aria-describedby="name">
-      </div>
-
-    <div class="form-group my-3">
-        <label for="name">Diabetes Pedigree Function</label>
-        <input type="text" class="form-control" name="n7" id="n7" aria-describedby="name">
-      </div>
-
-    <div class="form-group my-3">
-      <label for="name">Age</label>
-      <input type="text" class="form-control" name="n8" id="n8" aria-describedby="name">
-    </div>
+  <form action="result" method="post" id="diabetesForm" novalidate>
+    {% csrf_token %}
     
-  
-    
+    <div class="form-group my-3">
+      <label for="n1">Pregnancies</label>
+      <input type="text" class="form-control" name="n1" id="n1" aria-describedby="pregnanciesHelp">
+      <small id="pregnanciesHelp" class="form-text text-muted">
+        Enter the number of pregnancies. For men or those who haven't been pregnant, input 0.
+      </small>
+      <span class="text-danger" id="error-n1"></span>
+    </div>
+
+    <div class="form-group my-3">
+      <label for="n2">Glucose</label>
+      <input type="text" class="form-control" name="n2" id="n2" aria-describedby="glucoseHelp">
+      <small id="glucoseHelp" class="form-text text-muted">
+        Enter your blood glucose level (mg/dL). Ensure it's a numeric value.
+      </small>
+      <span class="text-danger" id="error-n2"></span>
+    </div>
+
+    <div class="form-group my-3">
+      <label for="n3">Blood Pressure</label>
+      <input type="text" class="form-control" name="n3" id="n3" aria-describedby="bloodPressureHelp">
+      <small id="bloodPressureHelp" class="form-text text-muted">
+        Enter your diastolic blood pressure (mm Hg). Must be numeric.
+      </small>
+      <span class="text-danger" id="error-n3"></span>
+    </div>
+
+    <div class="form-group my-3">
+      <label for="n4">Skin Thickness</label>
+      <input type="text" class="form-control" name="n4" id="n4" aria-describedby="skinThicknessHelp">
+      <small id="skinThicknessHelp" class="form-text text-muted">
+        Enter the thickness of your triceps skin fold (mm). Input 0 if not measured.
+      </small>
+      <span class="text-danger" id="error-n4"></span>
+    </div>
+
+    <div class="form-group my-3">
+      <label for="n5">Insulin</label>
+      <input type="text" class="form-control" name="n5" id="n5" aria-describedby="insulinHelp">
+      <small id="insulinHelp" class="form-text text-muted">
+        Enter your 2-hour serum insulin (mu U/mL). Input 0 if not measured.
+      </small>
+      <span class="text-danger" id="error-n5"></span>
+    </div>
+
+    <div class="form-group my-3">
+      <label for="n6">BMI</label>
+      <input type="text" class="form-control" name="n6" id="n6" aria-describedby="bmiHelp">
+      <small id="bmiHelp" class="form-text text-muted">
+        Enter your Body Mass Index (weight in kg/height in m²). Example: 23.5
+      </small>
+      <span class="text-danger" id="error-n6"></span>
+    </div>
+
+    <div class="form-group my-3">
+      <label for="n7">Diabetes Pedigree Function</label>
+      <input type="text" class="form-control" name="n7" id="n7" aria-describedby="dpfHelp">
+      <small id="dpfHelp" class="form-text text-muted">
+        Enter the diabetes pedigree function value (a measure of genetic risk). Example: 0.5
+      </small>
+      <span class="text-danger" id="error-n7"></span>
+    </div>
+
+    <div class="form-group my-3">
+      <label for="n8">Age</label>
+      <input type="text" class="form-control" name="n8" id="n8" aria-describedby="ageHelp">
+      <small id="ageHelp" class="form-text text-muted">
+        Enter your age in years. Example: 25
+      </small>
+      <span class="text-danger" id="error-n8"></span>
+    </div>
+
     <button type="submit" class="btn btn-primary my-3">Submit</button>
   </form>
-  <div class="container my-3">
-    <p style="font-weight: bold;">The Result is: {{result2}} </p>
-</div>
 
-{% if result2 == "Positive" %}
+  <div class="container my-3">
+    <p style="font-weight: bold;">The Result is: {{ result2 }} </p>
+  </div>
+
+  {% if result2 == "Positive" %}
     <div class="container my-3">
       <a href="{% url 'meds' %}" class="btn btn-success">View Recommended Actions</a>
     </div>
   {% endif %}
 </div>
+
+<script>
+  // JavaScript for basic validation
+  document.getElementById("diabetesForm").addEventListener("submit", function (event) {
+    let isValid = true;
+
+    const fields = [
+      { id: "n1", name: "Pregnancies" },
+      { id: "n2", name: "Glucose" },
+      { id: "n3", name: "Blood Pressure" },
+      { id: "n4", name: "Skin Thickness" },
+      { id: "n5", name: "Insulin" },
+      { id: "n6", name: "BMI" },
+      { id: "n7", name: "Diabetes Pedigree Function" },
+      { id: "n8", name: "Age" },
+    ];
+
+    fields.forEach((field) => {
+      const input = document.getElementById(field.id);
+      const errorSpan = document.getElementById("error-" + field.id);
+      if (!input.value || isNaN(input.value)) {
+        errorSpan.textContent = `${field.name} must be a valid numeric value.`;
+        isValid = false;
+      } else {
+        errorSpan.textContent = "";
+      }
+    });
+
+    if (!isValid) {
+      event.preventDefault(); // Prevent form submission
+    }
+  });
+</script>
 {% endblock %}

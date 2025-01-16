@@ -54,6 +54,13 @@
                 <span></span>
                 Test
               </a>
+              <a id="auth-links" href="{% url 'chatbot' %}">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                Chatbot
+              </a>
             {% else %}    
                 <a  href="{% url 'login' %}" id="auth-links"> 
                 <span></span>
@@ -171,7 +178,7 @@
           <ul class="nav justify-content-center border-bottom"  style="margin-top: 60px;">
             <li class="nav-item"><a href="{% url 'contact' %}" class="nav-link px-2 text-muted">ContactUs</a></li>
             <li class="nav-item"><a href="{% url 'test' %}" class="nav-link px-2 text-muted">Test</a></li>
-            <li class="nav-item"><a href="{% url 'explore' %}" class="nav-link px-2 text-muted">Explore</a></li>
+            <li class="nav-item"><a href="{% url 'consult' %}" class="nav-link px-2 text-muted">Consult</a></li>
             
           </ul>
           <p class="text-center text-muted">&copy; SugarCare-2024</p>

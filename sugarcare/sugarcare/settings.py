@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -44,6 +45,9 @@ INSTALLED_APPS = [
     'crispy_forms',
     'bootstrap4',
     'crispy_bootstrap4',
+    'chatbot.apps.ChatbotConfig',
+    'chat.apps.ChatConfig',
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -61,7 +65,9 @@ ROOT_URLCONF = 'sugarcare.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+          os.path.join(BASE_DIR, 'templates')
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -74,7 +80,19 @@ TEMPLATES = [
     },
 ]
 
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("localhost", 6379)],
+        },
+    },
+}
+
 WSGI_APPLICATION = 'sugarcare.wsgi.application'
+ASGI_APPLICATION = "sugarcare.asgi.application"
+
+
 
 
 # Database
@@ -140,3 +158,11 @@ MEDIA_URL='/media/'
 MESSAGE_TAGS = {
   messages.ERROR: 'danger'
 }
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'sugarcare12@gmail.com'  
+EMAIL_HOST_PASSWORD = 'bjfi lumf ykxk qvcb'  
+DEFAULT_FROM_EMAIL = 'noreply@example.com'  

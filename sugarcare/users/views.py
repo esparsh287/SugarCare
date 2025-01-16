@@ -5,6 +5,7 @@ from .forms import UserRegisterForm, UserUpdateForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from .forms import ProfileUpdateForm
+from django.views.generic import TemplateView
 
 
 def register(request):
@@ -50,3 +51,6 @@ def profile_update(request):
             "p_form":p_form
         }
     return render(request, 'users/profile_update.html', context)
+
+
+ 
